@@ -1,0 +1,35 @@
+class Solution {
+    private
+    void solve(vectorint vect,int target,vectorint arr,int sum,int index,vectorvectorint &ans){
+        if(sum==target){
+            ans.push_back(arr);
+            return;
+        }
+        for(int i = index;ivect.size();i++){
+            if(sum+vect[i]=target){
+                sum+=vect[i];
+                arr.push_back(vect[i]);
+                solve(vect,target,arr,sum,i,ans);
+                sum-=vect[i];
+                arr.pop_back();
+            }
+        }
+        return;
+    }
+  public
+    Function to return a list of indexes denoting the required 
+    combinations whose sum is equal to given number.
+    
+    vectorvectorint combinationSum(vectorint &A, int B) {
+         Your code here
+        vectorvectorint ans;
+        sort(A.begin(),A.end());
+        int sum=0;
+        
+        vectorint arr;
+        A.erase(unique(A.begin(),A.end()),A.end());
+        solve(A,B,arr,sum,0,ans);
+        
+        return ans;
+    }
+};
